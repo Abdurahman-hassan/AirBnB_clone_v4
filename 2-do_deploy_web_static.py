@@ -7,6 +7,7 @@ from os.path import exists
 from fabric.api import env, put, run
 
 env.hosts = ['18.206.207.101', '54.174.244.164']
+env.key_filename = '~/.ssh/id_rsa_alx_new_publickey'
 env.user = 'ubuntu'
 
 
@@ -26,6 +27,7 @@ def do_deploy(archive_path):
         run("rm -rf {}web_static".format(path))
         run("rm -rf /data/web_static/current")
         run("ln -s {} /data/web_static/current".format(path))
+        print("New version deployed!")
         return True
     except:
         return False
