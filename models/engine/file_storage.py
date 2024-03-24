@@ -108,3 +108,7 @@ class FileStorage:
             obj_name = f'{obj.__class__.__name__}.{obj.id}'
             if obj_name in self.__objects:
                 self.__objects.pop(obj_name)
+
+    def close(self):
+        """Method for deserializing the JSON file to objects."""
+        self.reload()
