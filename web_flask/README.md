@@ -1,0 +1,1 @@
+# This is a dynamic part of the airbnb clone project using Flask
