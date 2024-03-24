@@ -1,27 +1,27 @@
 #!/usr/bin/python3
-"""Starts a Flask web application"""
+"""
+starts a Flask web application
+"""
+
 from flask import Flask, render_template
 
 from models import storage
-from models.amenity import Amenity
-from models.state import State
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app.route('/hbnb_filters')
-def hbnb_filters():
-    """Display an HTML page with filters"""
-    states = storage.all(State).values()
-    amenities = storage.all(Amenity).values()
+@app.route('/hbnb_filters', strict_slashes=False)
+def filters():
+    """display a HTML page like 6-index.html from static"""
+    states = storage.all("State").values()
+    amenities = storage.all("Amenity").values()
     return render_template('10-hbnb_filters.html', states=states,
                            amenities=amenities)
 
 
 @app.teardown_appcontext
 def teardown_db(exception):
-    """Remove the current SQLAlchemy Session"""
+    """closes the storage on teardown"""
     storage.close()
 
 
