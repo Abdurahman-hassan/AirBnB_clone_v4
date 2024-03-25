@@ -1,0 +1,131 @@
+.container .filters {
+    background-color: #FFF;
+    height: 70px;
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.container .filters .dropdown_filters {
+    height: 100%;
+    display: flex;
+}
+
+.container .filters .locations,
+.container .filters .amenities {
+    position: relative;
+}
+
+.container .filters .locations {
+    border-right: 1px solid #DDDDDD;
+}
+
+.container .filters .locations h3,
+.container .filters .amenities h3 {
+    font-weight: 600;
+    margin: 10px 30px;
+}
+
+.container .filters .locations h4,
+.container .filters .amenities h4 {
+    font-weight: 400;
+    font-size: 14px;
+    margin: 11.5px 30px;
+}
+
+.container .filters button {
+    font-size: 18px;
+    background-color: #FF5A5F;
+    color: #FFFFFF;
+    height: 48px;
+    width: 20%;
+    border: none;
+    border-radius: 4px;
+    margin: 10px 30px;
+}
+
+.container .filters button:hover {
+    opacity: 0.9;
+}
+
+.container .filters .popover {
+    width: 100%;
+    background-color: #FAFAFA;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    position: absolute;
+    top: 70px;
+    padding: 10px 30px;
+    display: none;
+}
+
+.container .filters .popover h2 {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.container .locations .popover ul {
+    list-style: none;
+    margin: auto 15px 30px;
+}
+
+.container .amenities .popover ul {
+    list-style: none;
+    margin: 30px auto;
+}
+
+.container .locations .popover li,
+.container .amenities .popover li {
+    margin: 5px auto;
+}
+
+.container .locations:hover  .popover,
+.container .amenities:hover  .popover{
+    display: block;
+}
+
+@media only screen and (max-width: 1000px) {
+    .container .filters {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .container .filters {
+        width: 80%;
+    }
+
+    .container .filters .locations h3,
+    .container .filters .amenities h3 {
+        margin: 10px 15px;
+        font-size: 13px;
+    }
+
+    .container .filters .locations h4,
+    .container .filters .amenities h4 {
+        margin: 10px 15px;
+        font-size: 12px;
+    }
+
+    .container .filters .popover {
+        padding: 10px 18px;
+    }
+
+    .container .filters .popover h2 {
+        font-size: 14px;
+    }
+
+    .container .locations .popover ul {
+        list-style: none;
+        margin: auto 5px 30px;
+    }
+
+    .container .filters button {
+        font-size: 16px;
+        width: 30%;
+        margin: 10px 10px;
+    }
+}
