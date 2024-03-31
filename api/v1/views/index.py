@@ -1,12 +1,11 @@
 #!/usr/bin/python3
-""" Provides a simple storage system for managing and persisting
-"""
-from flask import jsonify
+""" The basic route of the API """
 
 from api.v1.views import app_views
+from flask import jsonify
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 def status():
-    """ Returns a JSON response """
+    """ Returns a JSON response with the status of the API"""
     return jsonify({"status": "OK"})
