@@ -7,7 +7,36 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 
 from models.base_model import BaseModel, Base
-from models.engine.file_storage import get_class_name_to_class
+
+
+def get_class_name_to_class_without_basemodel():
+    """
+    Returns a dictionary mapping class names to their corresponding
+    class objects.
+
+    This function is used to avoid circular imports by dynamically
+    importing the necessary classes.
+
+    Returns:
+        dict: A dictionary where keys are class names and values are
+        the corresponding class objects.
+    """
+    # This function is used to avoid circular import
+    from models.user import User
+    from models.state import State
+    from models.city import City
+    from models.amenity import Amenity
+    from models.place import Place
+    from models.review import Review
+
+    return {
+        'User': User,
+        'State': State,
+        'City': City,
+        'Amenity': Amenity,
+        'Place': Place,
+        'Review': Review
+    }
 
 
 class DBStorage:
@@ -29,7 +58,7 @@ class DBStorage:
 
     def all(self, cls=None):
         """query on the current database session"""
-        needed_classes = get_class_name_to_class()
+        needed_classes = get_class_name_to_class_without_basemodel()
         new_dict = {}
         for clss in needed_classes:
             if cls is None or cls is needed_classes[clss] or cls is clss:
@@ -73,3 +102,13 @@ class DBStorage:
     def close(self):
         """Close the current session."""
         self.__session.remove()
+
+    def get(self, cls, id):
+        """Retrieve an object from the database by class and id."""
+        if cls and id:
+            return self.__session.query(cls).get(id)
+        return None
+
+    def count(self, cls=None):
+        """Count the number of objects in storage."""
+        return len(self.all(cls))
