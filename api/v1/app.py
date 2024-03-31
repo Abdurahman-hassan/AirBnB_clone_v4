@@ -8,10 +8,14 @@ functions for closing the database connection.
 
 from os import getenv
 from flask import Flask, jsonify
+from flask_cors import CORS
 from api.v1.views import app_views
 from models import storage
 
 app = Flask(__name__)
+
+# Create a CORS instance and allow all origins for the entire app
+CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
 app.register_blueprint(app_views)
 
