@@ -1,5 +1,13 @@
 #!/usr/bin/python3
-""" Blueprint for API """
+""" Blueprint for API
+
+Defines the Blueprint for API views and imports the endpoint handlers.
+
+This module creates a Flask Blueprint named 'app_views' for organizing and
+structuring API endpoints under the '/api/v1' URL prefix. It also imports
+the endpoint handlers from the 'index' module within the 'api.v1.views'
+package.
+"""
 from flask import Blueprint
 
 app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')

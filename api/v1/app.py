@@ -1,5 +1,10 @@
 #!/usr/bin/python3
-""" Main file of the API """
+""" Main file of the API
+
+This module serves as the main file for the API application, initializing
+the Flask application, registering blueprints, and defining teardown
+functions for closing the database connection.
+"""
 
 from os import getenv
 
@@ -15,7 +20,13 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def teardown(exception):
-    """Close process"""
+    """Close process
+
+    Close the database connection when the application context is torn down.
+
+    Args:
+        exception: An optional exception that occurred.
+    """
     storage.close()
 
 
