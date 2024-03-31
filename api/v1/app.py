@@ -7,9 +7,7 @@ functions for closing the database connection.
 """
 
 from os import getenv
-
-from flask import Flask
-
+from flask import Flask, jsonify
 from api.v1.views import app_views
 from models import storage
 
@@ -28,6 +26,18 @@ def teardown(exception):
         exception: An optional exception that occurred.
     """
     storage.close()
+
+
+@app.errorhandler(404)
+def not_found(error):
+    """Handle 404 errors
+
+    Returns a JSON-formatted 404 status code response with a message.
+
+    Args:
+        error: The error that occurred.
+    """
+    return jsonify({"error": "Not found"}), 404
 
 
 if __name__ == "__main__":
