@@ -9,12 +9,11 @@ from models.amenity import Amenity
 from api.v1.views import app_views
 
 
-@app_views.route('/places/<place_id>/amenities', methods=['GET'],
-                 strict_slashes=False)
+@app_views.route('/places/<place_id>/amenities', strict_slashes=False)
 def get_place_amenities(place_id):
     """Retrieves the list of all Amenity objects of a Place"""
     place = storage.get(Place, place_id)
-    if not place:
+    if place is None:
         abort(404)
 
     if storage.storage_type == 'db':
@@ -33,10 +32,10 @@ def get_place_amenities(place_id):
 def delete_place_amenity(place_id, amenity_id):
     """Deletes a Amenity object from a Place"""
     place = storage.get(Place, place_id)
-    if not place:
+    if place is None:
         abort(404)
     amenity = storage.get(Amenity, amenity_id)
-    if not amenity:
+    if amenity is None:
         abort(404)
     if storage.storage_type == 'db':
         if amenity not in place.amenities:
@@ -55,10 +54,10 @@ def delete_place_amenity(place_id, amenity_id):
 def link_place_amenity(place_id, amenity_id):
     """Link a Amenity object to a Place"""
     place = storage.get(Place, place_id)
-    if not place:
+    if place is None:
         abort(404)
     amenity = storage.get(Amenity, amenity_id)
-    if not amenity:
+    if amenity is None:
         abort(404)
     if storage.storage_type == 'db':
         if amenity in place.amenities:
