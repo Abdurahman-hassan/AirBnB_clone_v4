@@ -76,12 +76,10 @@ class FileStorage:
 
     def save(self):
         """Save the current state of stored objects to the JSON file."""
-
         obj_dict = {}
-        for key, value in FileStorage.__objects.items():
-            obj_dict[key] = value.to_dict(save_to_dict=True)
-
-        with open(FileStorage.__file_path, 'w') as json_file:
+        for key in self.__objects:
+            obj_dict[key] = self.__objects[key].to_dict()
+        with open(self.__file_path, 'w') as json_file:
             json.dump(obj_dict, json_file)
 
     def reload(self):
