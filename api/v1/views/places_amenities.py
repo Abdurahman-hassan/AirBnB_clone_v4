@@ -45,7 +45,7 @@ def delete_place_amenity(place_id, amenity_id):
         if amenity_id not in place.amenity_ids:
             abort(404)
         place.amenity_ids.remove(amenity_id)
-    storage.save()
+    place.save()
     return jsonify({}), 200
 
 
@@ -67,5 +67,5 @@ def link_place_amenity(place_id, amenity_id):
         if amenity_id in place.amenity_ids:
             return jsonify(amenity.to_dict()), 200
         place.amenity_ids.append(amenity_id)
-    storage.save()
+    place.save()
     return jsonify(amenity.to_dict()), 201
