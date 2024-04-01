@@ -90,7 +90,9 @@ class HBNBCommand(cmd.Cmd):
                 try:
                     value = float(value)
                 except ValueError:
-                    print(f"Error: {value} is not a valid float. Skipping...")
+                    err = "Error: {} is not a valid float. Skipping...".format(
+                          value)
+                    print(err)
                     continue
             else:
                 try:
@@ -116,10 +118,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
-        elif f'{args[0]}.{args[1]}' not in objects_dict:
+        elif "{}.{}".format(args[0], args[1]) not in objects_dict:
             print("** no instance found **")
         else:
-            print(objects_dict[f'{args[0]}.{args[1]}'])
+            print(objects_dict['{}.{}'.format(args[0], args[1])])
 
     def do_destroy(self, line):
         """
@@ -134,10 +136,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
-        elif f'{args[0]}.{args[1]}' not in objects_dict:
+        elif "{}.{}".format(args[0], args[1]) not in objects_dict:
             print("** no instance found **")
         else:
-            del objects_dict[f'{args[0]}.{args[1]}']
+            del objects_dict['{}.{}'.format(args[0], args[1])]
             storage.save()
 
     def do_all(self, arg):
@@ -174,7 +176,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 1:
             print("** instance id missing **")
             return
-        if f'{args[0]}.{args[1]}' not in objects_dict:
+        if '{}.{}'.format(args[0], args[1]) not in objects_dict:
             print("** no instance found **")
             return
         if len(args) == 2:
@@ -187,7 +189,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
                 return
         if len(args) == 4:
-            updated_obj = objects_dict[f'{args[0]}.{args[1]}']
+            updated_obj = objects_dict['{}.{}'.format(args[0], args[1])]
             # If the updated argument is new
             if args[2] in updated_obj.__class__.__dict__.keys():
                 value_type = type(updated_obj.__class__.__dict__[args[2]])
@@ -197,7 +199,7 @@ class HBNBCommand(cmd.Cmd):
 
             storage.save()
         elif type(eval(args[2])) == dict:
-            updated_obj = objects_dict[f'{args[0]}.{args[1]}']
+            updated_obj = objects_dict['{}.{}'.format(args[0], args[1])]
 
             for key, val in eval(args[2]).items():
                 if (key in updated_obj.__class__.__dict__.keys() and
@@ -247,11 +249,11 @@ class HBNBCommand(cmd.Cmd):
                 method_name = match_method.group(1)
                 args = match_method.group(2)
                 # args = re.sub("[\"\',]", "", args)
-                args = f"{cls_name} " + args
+                args = "{} ".format(cls_name) + args
 
                 return methods[method_name](args)
 
-        print(f"*** Unknown syntax: {line}")
+        print("*** Unknown syntax: {}".format(line))
         return False
 
 

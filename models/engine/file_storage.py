@@ -71,7 +71,7 @@ class FileStorage:
         Args:
             obj: An object to be stored.
         """
-        obj_name = f'{obj.__class__.__name__}.{obj.id}'
+        obj_name = '{}.{}'.format(obj.__class__.__name__, obj.id)
         FileStorage.__objects[obj_name] = obj
 
     def save(self):
@@ -103,7 +103,7 @@ class FileStorage:
             obj (Optional[object]): The object to delete from storage.
         """
         if obj is not None:
-            obj_name = f'{obj.__class__.__name__}.{obj.id}'
+            obj_name = '{}.{}'.format(obj.__class__.__name__, obj.id)
             if obj_name in self.__objects:
                 self.__objects.pop(obj_name)
 
