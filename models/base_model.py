@@ -58,7 +58,16 @@ class BaseModel:
         Returns:
             str: String representation of the object.
         """
-        return f"[{self.__class__.__name__}] ({self.id}) {self.to_dict()}"
+
+        str_representation = "[{}] ({}) {}".format(
+            self.__class__.__name__,
+            self.id,
+            self.to_dict()
+            )
+
+        return str_representation
+
+        # return f"[{self.__class__.__name__}] ({self.id}) {self.to_dict()}"
 
     def save(self):
         """Save the current state of the object and trigger
