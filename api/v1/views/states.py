@@ -8,7 +8,7 @@ from models import storage
 from models.state import State
 
 
-@app_views.route('/states', methods=['GET'], strict_slashes=False)
+@app_views.route('/states', strict_slashes=False)
 def get_states():
     """ Retrieves the list of all State objects """
     all_states = storage.all(State).values()
@@ -18,13 +18,13 @@ def get_states():
     return jsonify(states_list)
 
 
-@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>', strict_slashes=False)
 def get_state(state_id):
     """ Retrieves a State object """
     state = storage.get(State, state_id)
-    if not state:
+    if state is None:
         abort(404)
-    return jsonify(state.to_dict())
+    return jsonify(State.to_dict(state))
 
 
 @app_views.route('/states/<state_id>', methods=['DELETE'],
@@ -32,9 +32,9 @@ def get_state(state_id):
 def delete_state(state_id):
     """ Deletes a State object """
     state = storage.get(State, state_id)
-    if not state:
+    if state is None:
         abort(404)
-    storage.delete(state)
+    state.delete()
     storage.save()
     return jsonify({}), 200
 
