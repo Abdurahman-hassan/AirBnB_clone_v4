@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ holds class User"""
+import hashlib
 from sqlalchemy.orm import relationship
 
 import models
@@ -27,4 +28,7 @@ class User(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         """initializes user"""
+        if "password" in kwargs:
+            kwargs["password"] = hashlib.md5(
+                kwargs["password"].encode()).hexdigest()
         super().__init__(*args, **kwargs)
