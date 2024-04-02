@@ -54,9 +54,11 @@ class FileStorage:
             dict: A dictionary containing all stored objects of the specified
             class or all stored objects if no class is specified.
         """
-
         if cls is not None:
             cls_objects = {}
+            cls = get_class_name_to_class().get(cls, None)
+            if cls is None:
+                return cls_objects
             for key, obj in self.__objects.items():
                 if isinstance(obj, cls):
                     cls_objects[key] = obj
