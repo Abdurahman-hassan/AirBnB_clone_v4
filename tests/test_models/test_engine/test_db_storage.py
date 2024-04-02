@@ -69,7 +69,10 @@ test_db_storage.py'])
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
 
-    def test_get_method(self):
+
+class TestDBStorage(unittest.TestCase):
+    """Test the DBStorage class"""
+    def test_get(self):
         """Test that get method returns the object based on class and id"""
         # Create and save a new object to the database
         new_obj = State()
@@ -81,15 +84,12 @@ test_db_storage.py'])
         # Test get method with non-existing id
         self.assertIsNone(models.storage.get(State, "fake-id"))
 
-    def test_count_method(self):
+    def test_count(self):
         """Test that count method returns the correct number of objects"""
         models.storage.reload()
         initial_count = models.storage.count()
         state_count = models.storage.count(State)
-        # Create and save a new object to the database
-        new_obj = State()
+        new_obj = State(name="California")
         models.storage.new(new_obj)
-        # Test count method with no class name
         self.assertEqual(models.storage.count(State), state_count + 1)
-
         self.assertEqual(models.storage.count(), initial_count + 1)
