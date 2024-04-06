@@ -15,7 +15,7 @@ from models import storage
 app = Flask(__name__)
 
 # Create a CORS instance and allow all origins for the entire app
-CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 app.register_blueprint(app_views)
 
