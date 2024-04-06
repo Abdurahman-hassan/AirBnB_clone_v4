@@ -54,6 +54,10 @@
 
 }
 
+.amenities h4 {
+    overflow: auto;
+}
+
 .popover {
     display: none;
     background-color: #FAFAFA;
@@ -73,6 +77,10 @@
 .popover li {
     margin: 10px 0 5px 0;
     list-style: none;
+}
+
+.popover li input[type="checkbox"] {
+    margin-right: 10px;
 }
 
 .filters .locations ul {
