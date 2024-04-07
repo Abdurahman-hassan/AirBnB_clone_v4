@@ -112,6 +112,7 @@ $('document').ready(function () {
                         <DIV class="number_rooms">${place.number_rooms} Bedroom</DIV>
                         <DIV class="number_bathrooms">${place.number_bathrooms} Bathroom</DIV>
                     </DIV>
+                    <DIV class="owner">${users[place.user_id]}</DIV>
                     <DIV class="description">${place.description}</DIV>
                 </ARTICLE>`;
         }));
