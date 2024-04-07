@@ -4,9 +4,11 @@
 Starts a Flask web application
 """
 
-from flask import Flask, render_template
-from models import storage
 from uuid import uuid4
+
+from flask import Flask, render_template
+
+from models import storage
 
 app = Flask(__name__)
 
@@ -20,13 +22,15 @@ def hbnb():
     amenities = storage.all("Amenity")
     places = storage.all("Place")
     cache_id = str(uuid4())
-
+    users = dict([user.id, "{} {}".format(user.first_name, user.last_name)]
+                 for user in storage.all('User').values())
     return render_template(
         "4-hbnb.html",
         states=states,
         amenities=amenities,
         places=places,
-        cache_id=cache_id
+        cache_id=cache_id,
+        users=users
     )
 
 
