@@ -1,7 +1,15 @@
 /* global $ */
 $('document').ready(function () {
-  const selectedAmenities = {};
-  const selectedStates = {};
+  let selectedAmenities = {};
+  let selectedStates = {};
+  let users = {};
+
+  // Fetch users and store them in a dictionary
+  $.get('http://0.0.0.0:5001/api/v1/users/', function (data) {
+    for (let i = 0; i < data.length; i++) {
+      users[data[i].id] = data[i].first_name + ' ' + data[i].last_name;
+    }
+  });
 
   // Function to update the amenities list in the H4 tag
   function updateAmenitiesList () {
@@ -75,6 +83,7 @@ $('document').ready(function () {
                         <DIV class="number_rooms">${place.number_rooms} Bedroom</DIV>
                         <DIV class="number_bathrooms">${place.number_bathrooms} Bathroom</DIV>
                     </DIV>
+                    <DIV class="owner">${users[place.user_id]}</DIV>
                     <DIV class="description">${place.description}</DIV>
                 </ARTICLE>`;
       }));
