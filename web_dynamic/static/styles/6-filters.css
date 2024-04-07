@@ -51,11 +51,11 @@
     font-weight: 400;
     font-size: 14px;
     margin: 2px 20px;
-
 }
 
 .amenities h4 {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-wrap: break-word;
 }
 
 .popover {
@@ -68,6 +68,9 @@
     width: 100%;
     top: 100%;
     margin-top: 0;
+    height: 70vh;
+    overflow-y: auto;
+    overflow-wrap: break-word;
 }
 
 .popover h2 {
